@@ -1,0 +1,34 @@
+﻿<Window x:Class="WPFDateDialog.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:convert="clr-namespace:WPFDateDialog.View.ValueConverter"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:bhv="clr-namespace:Behaviors"
+        WindowStyle="ToolWindow"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        bhv:WindowBehaviours.WindowClosedCommand="{Binding MainBusinessLogicViewModel_.CmdBreak}"
+        Title="{Binding MainBusinessLogicViewModel_.WindowTitle}" MinHeight="80" MinWidth="220">
+    <Window.Resources>
+        <ResourceDictionary>
+            <convert:NullableBoolToBrush x:Key="nullableBoolToBrush" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <xctk:DateTimePicker Grid.Row="0" Value="{Binding MainBusinessLogicViewModel_.DateAndTime}"
+                         AutoCloseCalendar="True" DefaultValue="{x:Static sys:DateTime.Now}" />
+        <DockPanel Name="dockPanel1" Grid.Row="1" FlowDirection="RightToLeft" Margin="5,5,0,5">
+            <Button Content="OK" Command="{Binding MainBusinessLogicViewModel_.CmdOk}" Height="23" Name="btnTrue" Width="Auto"
+              HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,0,0,0" IsDefault="True"/>
+            <Button Content="Null" Command="{Binding MainBusinessLogicViewModel_.CmdNull}" Height="23" Name="btnNull" Width="Auto"
+              HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,0,0,0" IsDefault="false" />
+            <Rectangle />
+        </DockPanel>
+    </Grid>
+</Window>

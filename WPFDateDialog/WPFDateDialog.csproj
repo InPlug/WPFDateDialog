@@ -85,8 +85,7 @@
     <Reference Include="NetEti.Logging">
       <HintPath>$(AssemblyRoot)\NetEti.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="NetEti.MVVMini, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NetEti.MVVMini">
       <HintPath>$(AssemblyRoot)\NetEti.MVVMini.dll</HintPath>
     </Reference>
     <Reference Include="System" />

@@ -75,6 +75,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\WPFDateDialog.ViewModel.csproj">
+      <Project>{decef4be-ab30-4d89-bfe7-bcb5d375b6d3}</Project>
+      <Name>WPFDateDialog.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

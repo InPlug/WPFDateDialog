@@ -39,10 +39,10 @@ namespace WPFDateDialog
             string callingNodeId = null;
             DateTime? dateAndTime = null;
             callingNodeId = source.NodeName;
-            if (source.Results != null && source.Results.Count > 0)
+            if (source.Results != null && source.Results.Count > 0 && source.Results.ContainsKey(callingNodeId))
             {
-                Result lastResult = source.Results.First().Value;
-                this.ReturnObject = lastResult.ReturnObject;
+                Result lastResult = source.Results[callingNodeId];
+                this.ReturnObject = lastResult?.ReturnObject;
                 dateAndTime = this.ReturnObject == null ? DateTime.Now : (this.ReturnObject as DateTime?);
             }
             else

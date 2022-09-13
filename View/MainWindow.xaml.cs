@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Xceed.Wpf.Toolkit;
 
 namespace WPFDateDialog.View
 {

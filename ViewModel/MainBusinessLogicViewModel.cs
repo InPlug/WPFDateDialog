@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows;
 using NetEti.MVVMini;
 using WPFDateDialog.Model;
-using System.Text;
-using NetEti.Globals;
-using NetEti.ApplicationControl;
-using System.IO;
-using System.Collections.Generic;
 using System.Threading;
-using System.Windows.Controls;
 using System.Threading.Tasks;
 using Model;
 

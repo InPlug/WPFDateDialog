@@ -1,6 +1,4 @@
-﻿using System;
-using NetEti.MVVMini;
-using System.Windows.Input;
+﻿using NetEti.MVVMini;
 
 namespace WPFDateDialog.ViewModel
 {

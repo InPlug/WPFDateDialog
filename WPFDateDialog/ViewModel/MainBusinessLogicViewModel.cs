@@ -3,12 +3,11 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows;
 using NetEti.MVVMini;
-using WPFDateDialog.Model;
+using Model;
 using System.Threading;
 using System.Threading.Tasks;
-using Model;
 
-namespace WPFDateDialog.ViewModel
+namespace ViewModel
 {
     /// <summary>
     /// ViewModel für die TreeView in LogicalTaskTreeControl im ersten Tab des MainWindow.
@@ -33,16 +32,16 @@ namespace WPFDateDialog.ViewModel
         public void WaitAndClose(int millisecondsDelay, bool dialogResult)
         {
             this._canHandleCmdBreak = false;
-            if (this._uIMain != null && this._uIMain is Window && !(this._uIMain as Window).DialogResult.HasValue)
+            if (this._uIMain != null && this._uIMain is Window && !((Window)this._uIMain).DialogResult.HasValue)
             {
                 CommandManager.InvalidateRequerySuggested();
                 new TaskFactory().StartNew(new Action(() =>
                 {
                     Thread.Sleep(millisecondsDelay);
                     if (this.Dispatcher.CheckAccess())
-                        (this._uIMain as Window).DialogResult = true;
+                        ((Window)this._uIMain).DialogResult = true;
                     else
-                        this.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(new Action(() => { (this._uIMain as Window).DialogResult = dialogResult; })));
+                        this.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(new Action(() => { ((Window)this._uIMain).DialogResult = dialogResult; })));
                 }));
             }
         }
@@ -58,7 +57,7 @@ namespace WPFDateDialog.ViewModel
         {
             get
             {
-                return this.CallingNodeId + " - " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return this.CallingNodeId + " - " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString();
             }
             set
             {
@@ -149,9 +148,9 @@ namespace WPFDateDialog.ViewModel
         private RelayCommand _cmdBreakMainBusinessLogicRelayCommand;
         private FrameworkElement _uIMain { get; set; }
         private bool _canHandleCmdBreak;
-        private System.Windows.Threading.Dispatcher _uIDispatcher { get; set; }
+        private System.Windows.Threading.Dispatcher? _uIDispatcher { get; set; }
 
-        private MainBusinessLogicViewModel() { }
+        //private MainBusinessLogicViewModel() { }
 
         private void mainBusinessLogicStateChanged(object sender, State state)
         {
@@ -164,7 +163,7 @@ namespace WPFDateDialog.ViewModel
             this._cmdBreakMainBusinessLogicRelayCommand.UpdateCanExecuteState(this.Dispatcher);
         }
 
-        private void cmdOkMainBusinessLogicExecute(object parameter)
+        private void cmdOkMainBusinessLogicExecute(object? parameter)
         {
             this._root.HandleCmdOk();
         }
@@ -174,7 +173,7 @@ namespace WPFDateDialog.ViewModel
             return this._root.CanHandleCmdOk();
         }
 
-        private void cmdNullMainBusinessLogicExecute(object parameter)
+        private void cmdNullMainBusinessLogicExecute(object? parameter)
         {
             this._root.HandleCmdNull();
         }
@@ -184,7 +183,7 @@ namespace WPFDateDialog.ViewModel
             return this._root.CanHandleCmdNull();
         }
 
-        private void cmdBreakMainBusinessLogicExecute(object parameter)
+        private void cmdBreakMainBusinessLogicExecute(object? parameter)
         {
             this._root.HandleCmdBreak();
         }

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFDateDialog.View
+namespace View
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml

@@ -1,8 +1,8 @@
 ﻿using System;
-using NetEti.Globals;
 using Vishnu.Interchange;
-using WPFDateDialog.ViewModel;
+using ViewModel;
 using System.Windows;
+using System.ComponentModel;
 
 namespace WPFDateDialog
 {
@@ -14,12 +14,12 @@ namespace WPFDateDialog
         /// <summary>
         /// Wird ausgelöst, wenn sich der Verarbeitungsfortschritt geändert hat.
         /// </summary>
-        public event CommonProgressChangedEventHandler NodeProgressChanged;
+        public event ProgressChangedEventHandler? NodeProgressChanged;
 
         /// <summary>
         /// Rückgabe-Objekt des Checkers (zusätzlich zum Check-Result (bool?)).
         /// </summary>
-        public object ReturnObject { get; set; }
+        public object? ReturnObject { get; set; }
 
         /// <summary>
         /// Startet den Checker - wird von einem Knoten im LogicalTaskTree aufgerufen.
@@ -31,15 +31,15 @@ namespace WPFDateDialog
         /// <param name="treeParameters">Für den gesamten Tree gültige Parameter oder null.</param>
         /// <param name="source">Auslösendes TreeEvent oder null.</param>
         /// <returns>True, False oder null</returns>
-        public bool? Run(object checkerParameters, TreeParameters treeParameters, TreeEvent source)
+        public bool? Run(object? checkerParameters, TreeParameters treeParameters, TreeEvent source)
         {
             // Parameterübernahme
-            string callingNodeId = null;
+            string? callingNodeId = null;
             DateTime? dateAndTime = null;
             callingNodeId = source.NodeName;
             if (source.Results != null && source.Results.Count > 0 && source.Results.ContainsKey(callingNodeId))
             {
-                Result lastResult = source.Results[callingNodeId];
+                Result? lastResult = source.Results[callingNodeId];
                 this.ReturnObject = lastResult?.ReturnObject;
                 dateAndTime = this.ReturnObject == null ? DateTime.Now : (this.ReturnObject as DateTime?);
             }
@@ -64,7 +64,7 @@ namespace WPFDateDialog
             // Verbinden von Main-Window mit Main-ViewModel
             this._mainWindow.DataContext = this._mainWindowViewModel;
 
-            this.OnNodeProgressChanged(String.Format("{0}", this.GetType().Name), 100, 0, ItemsTypes.items);
+            this.OnNodeProgressChanged(0);
 
             this._mainWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
             Point parentViewAbsoluteScreenPosition = treeParameters.GetParentViewAbsoluteScreenPosition();
@@ -80,7 +80,7 @@ namespace WPFDateDialog
             {
                 //InfoController.Say("User clicked Cancel");
             }
-            this.OnNodeProgressChanged(String.Format("{0}", this.GetType().Name), 100, 100, ItemsTypes.items);
+            this.OnNodeProgressChanged(100);
             //bool? rtn = this._mainBusinessLogic.DialogResult;
             bool? rtn = true;
 
@@ -92,16 +92,16 @@ namespace WPFDateDialog
             return rtn;
         }
 
-        private View.MainWindow _mainWindow;
-        private Model.MainBusinessLogic _mainBusinessLogic;
-        private ViewModel.MainBusinessLogicViewModel _mainBusinessLogicViewModel;
-        private ViewModel.MainWindowViewModel _mainWindowViewModel;
+        private View.MainWindow? _mainWindow;
+        private Model.MainBusinessLogic? _mainBusinessLogic;
+        private ViewModel.MainBusinessLogicViewModel? _mainBusinessLogicViewModel;
+        private ViewModel.MainWindowViewModel? _mainWindowViewModel;
 
-        private void OnNodeProgressChanged(string itemsName, int countAll, int countSucceeded, ItemsTypes itemsType)
+        private void OnNodeProgressChanged(int progressPercentage)
         {
             if (NodeProgressChanged != null)
             {
-                NodeProgressChanged(null, new CommonProgressChangedEventArgs(itemsName, countAll, countSucceeded, itemsType, null));
+                NodeProgressChanged(null, new ProgressChangedEventArgs(progressPercentage, null));
             }
         }
     }

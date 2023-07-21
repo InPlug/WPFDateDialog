@@ -1,6 +1,6 @@
 ﻿using NetEti.MVVMini;
 
-namespace WPFDateDialog.ViewModel
+namespace ViewModel
 {
     /// <summary>
     /// ViewModel für das MainWindow.
@@ -42,7 +42,7 @@ namespace WPFDateDialog.ViewModel
         /// <param name="mainBusinessLogicViewModel">ViewModel für den LogicalTaskTree.</param>
         public MainWindowViewModel(MainBusinessLogicViewModel mainBusinessLogicViewModel)
         {
-            this.MainBusinessLogicViewModel_ = mainBusinessLogicViewModel;
+            this._mainBusinessLogicViewModel_ = mainBusinessLogicViewModel;
         }
 
         #endregion public members

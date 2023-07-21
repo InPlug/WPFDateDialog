@@ -1,4 +1,4 @@
-﻿namespace WPFDateDialog.View
+﻿namespace View
 {
     /// <summary>
     /// Leeres statisches Singleton, kann für Locking verwendet werden.
@@ -8,7 +8,7 @@
     /// </remarks>
     public sealed class LockHelper
     {
-        private static LockHelper instance = null;
+        private static LockHelper? instance = null;
         private static readonly object padlock = new object();
 
         LockHelper()

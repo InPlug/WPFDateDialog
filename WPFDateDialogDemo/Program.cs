@@ -1,5 +1,5 @@
 ﻿using System;
-using NetEti.Globals;
+using System.ComponentModel;
 using System.Windows;
 using Vishnu.Interchange;
 
@@ -19,9 +19,9 @@ namespace WPFDateDialog
             MessageBox.Show(String.Format("Result: {0}", ((wpfDateDialog.ReturnObject) ?? "null").ToString()));
         }
 
-        static void SubNodeProgressChanged(object sender, CommonProgressChangedEventArgs args)
+        static void SubNodeProgressChanged(object? sender, ProgressChangedEventArgs args)
         {
-            Console.WriteLine("{0}: {1} von {2}", args.ItemName, args.CountSucceeded, args.CountAll);
+            Console.WriteLine(args.ProgressPercentage);
         }
     }
 }

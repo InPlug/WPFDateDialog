@@ -1,8 +1,7 @@
 ﻿using System;
 using NetEti.ApplicationControl;
-using Model;
 
-namespace WPFDateDialog.Model
+namespace Model
 {
     /// <summary>
     /// Verarbeitungszustände einer Applikation.
@@ -42,12 +41,12 @@ namespace WPFDateDialog.Model
         /// Übernimmt minimale Steuerungsmöglichkeiten für die konkret
         /// geladene UI vom ViewModel. Wird vom ViewModel gesetzt.
         /// </summary>
-        public IMinimumDialogServer DialogServer { get; set; }
+        public IMinimumDialogServer? DialogServer { get; set; }
 
         /// <summary>
         /// Wird aufgerufen, wenn sich der Verarbeitungszustand eines Knotens geändert hat.
         /// </summary>
-        public event StateChangedEventHandler StateChanged;
+        public event StateChangedEventHandler? StateChanged;
 
         /// <summary>
         /// Id des aufrufenden Knoten aus Vishnu.
@@ -101,7 +100,7 @@ namespace WPFDateDialog.Model
         {
             this.ModelState = State.Breaked;
             this.DialogResult = false;
-            this.DialogServer.WaitAndClose(500, false); // Das Window ist schon geschlossen!
+            this.DialogServer?.WaitAndClose(500, false); // Das Window ist schon geschlossen!
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace WPFDateDialog.Model
         {
             this.ModelState = State.Done;
             this.DialogResult = true;
-            this.DialogServer.WaitAndClose(500, false);
+            this.DialogServer?.WaitAndClose(500, false);
         }
 
         /// <summary>
@@ -139,7 +138,7 @@ namespace WPFDateDialog.Model
             this.DateAndTime = null;
             this.DialogResult = true;
             this.ModelState = State.Done;
-            this.DialogServer.WaitAndClose(500, false);
+            this.DialogServer?.WaitAndClose(500, false);
         }
 
         /// <summary>

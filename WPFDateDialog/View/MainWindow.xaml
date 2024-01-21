@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         Topmost="True"
         bhv:WindowBehaviours.WindowClosedCommand="{Binding MainBusinessLogicViewModel_.CmdBreak}"
-        Title="{Binding MainBusinessLogicViewModel_.WindowTitle}" MinHeight="80" MinWidth="220">
+        Title="{Binding MainBusinessLogicViewModel_.WindowTitle}"
+        MinHeight="80" MinWidth="220" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <convert:NullableBoolToBrush x:Key="nullableBoolToBrush" />

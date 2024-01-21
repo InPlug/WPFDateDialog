@@ -53,7 +53,10 @@ namespace WPFDateDialog
             this._mainBusinessLogic = new Model.MainBusinessLogic(callingNodeId, dateAndTime);
 
             // Das Main-Window
-            this._mainWindow = new View.MainWindow();
+            // Point parentViewAbsoluteScreenPosition = treeParameters.GetParentViewAbsoluteScreenPosition();
+            Point parentViewAbsoluteScreenPosition = treeParameters.LastParentViewAbsoluteScreenPosition;
+            this._mainWindow = new View.MainWindow(parentViewAbsoluteScreenPosition);
+            this._mainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
 
             // Das MainBusinessLogic-ViewModel
             this._mainBusinessLogicViewModel = new MainBusinessLogicViewModel(this._mainBusinessLogic, this._mainWindow);
@@ -65,11 +68,6 @@ namespace WPFDateDialog
             this._mainWindow.DataContext = this._mainWindowViewModel;
 
             this.OnNodeProgressChanged(0);
-
-            this._mainWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
-            Point parentViewAbsoluteScreenPosition = treeParameters.GetParentViewAbsoluteScreenPosition();
-            this._mainWindow.Left = parentViewAbsoluteScreenPosition.X - this._mainWindow.ActualWidth / 2;
-            this._mainWindow.Top = parentViewAbsoluteScreenPosition.Y - this._mainWindow.ActualHeight / 2;
 
             this._mainWindow.ShowDialog();
             if (this._mainBusinessLogic.DialogResult)

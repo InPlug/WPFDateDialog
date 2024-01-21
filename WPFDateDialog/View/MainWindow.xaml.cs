@@ -12,7 +12,7 @@ namespace View
         /// <summary>
         /// Konstruktor des Haupt-Fensters.
         /// </summary>
-        public MainWindow()
+        public MainWindow(Point parentViewAbsoluteScreenPosition)
         {
             /* Der nachfolgende Lock wurde erforderlich, da ansonsten (bei sehr großen Jobs mit sehr vielen Controls) folgender Fehler auftreten kann:
              * Ietztes Ergebnis: Node334: System.NullReferenceException: Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.
@@ -28,14 +28,24 @@ namespace View
              * Weiterer Hinweis: LockHelper muss zwingend eine Klasse dieser Assembly sein, Auslagerung in NetEti.Globals führt bei großen Jobs zu Ladefehlern!
             */
             lock (LockHelper.Instance)
+            {
                 InitializeComponent();
+                this._parentViewAbsoluteScreenPosition = parentViewAbsoluteScreenPosition;
+            }
         }
 
         #endregion public members
 
         #region private members
 
+        private Point _parentViewAbsoluteScreenPosition;
+
         #endregion private members
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Left = this._parentViewAbsoluteScreenPosition.X - this.ActualWidth / 2;
+            this.Top = this._parentViewAbsoluteScreenPosition.Y - this.ActualHeight / 2;
+        }
     }
 }

@@ -10,7 +10,7 @@
     <Description>$(AssemblyName) - Vishnu-Plugin: Dialog zur Datumseingabe</Description>
     <Company>NetEti</Company>
     <Authors>Erik Nagel</Authors>
-    <Copyright>Copyright © $(Authors) 2014-2023</Copyright>
+    <Copyright>Copyright © $(Authors) 2014-$([System.DateTime]::Now.Year)</Copyright>
     <PackageTags>NetEti Vishnu Plugin Dialog Datumseingabe</PackageTags>
     <AssemblyVersion>8.1.0.0</AssemblyVersion>
     <FileVersion>8.1.0.0</FileVersion>
